@@ -7,30 +7,44 @@ import ContactsPage from 'pages/ContactsPage/ContactsPage';
 import UserMenu from './UserMenu/UserMenu';
 
 export const App = () => {
-  const isLoading = useSelector(state => state.contacts.isLoading);
-  console.log(isLoading);
+  const userData = useSelector(state => state.auth.userData);
+  // const isLoading = useSelector(state => state.contacts.isLoading);
+  // console.log(isLoading);
   return (
     <div className={css.mainSection}>
       <header className={css.Header}>
         <nav className={css.NavPart}>
-          <NavLink
-            to="/login"
-            className={({ isActive }) => (isActive ? css.active : css.NavLink)}
-          >
-            Login
-          </NavLink>
-          <NavLink
-            to="/register"
-            className={({ isActive }) => (isActive ? css.active : css.NavLink)}
-          >
-            Register
-          </NavLink>
-          <NavLink
-            to="/contacts"
-            className={({ isActive }) => (isActive ? css.active : css.NavLink)}
-          >
-            Contacts
-          </NavLink>
+          {userData !== null ? null : (
+            <>
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  isActive ? css.active : css.NavLink
+                }
+              >
+                Login
+              </NavLink>
+
+              <NavLink
+                to="/register"
+                className={({ isActive }) =>
+                  isActive ? css.active : css.NavLink
+                }
+              >
+                Register
+              </NavLink>
+            </>
+          )}
+          {userData !== null ? (
+            <NavLink
+              to="/contacts"
+              className={({ isActive }) =>
+                isActive ? css.active : css.NavLink
+              }
+            >
+              Contacts
+            </NavLink>
+          ) : null}
           <UserMenu />
         </nav>
       </header>
