@@ -1,10 +1,16 @@
-import ErrorIndicator from 'components/ErrorIndicator';
-import Loader from 'components/Loader/Loader';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+// import ErrorIndicator from 'components/ErrorIndicator';
+// import Loader from 'components/Loader/Loader';
+import React, {
+  // useEffect,
+  useState,
+} from 'react';
+import {
+  useDispatch,
+  // useSelector
+} from 'react-redux';
+// import { useNavigate } from 'react-router-dom';
 
-import { registerUserRequest } from 'redux/userSlice';
+import { registerUserRequest } from 'redux/user/userSlice';
 
 function RegisterPage() {
   const dispatch = useDispatch();

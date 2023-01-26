@@ -6,12 +6,14 @@ function LoginPage() {
       <h1>LogIn</h1>
       {/* {isLoading && <Loader />}
       {error && <ErrorIndicator error={error} />} */}
-      <form onSubmit={handleSubmit}>
+      <form
+      // onSubmit={handleSubmit}
+      >
         <label>
           Email:
           <input
-            onChange={e => setEmail(e.target.value)}
-            value={email}
+            // onChange={e => setEmail(e.target.value)}
+            // value={email}
             type="email"
             required
           />
@@ -19,13 +21,16 @@ function LoginPage() {
         <label>
           Password:
           <input
-            onChange={e => setPassword(e.target.value)}
-            value={password}
+            // onChange={e => setPassword(e.target.value)}
+            // value={password}
             type="password"
             required
           />
         </label>
-        <button disabled={isLoading} type="submit">
+        <button
+          // disabled={isLoading}
+          type="submit"
+        >
           Enter
         </button>
       </form>

@@ -32,8 +32,8 @@ export const UserAPI = {
     const { data } = await $publicHost.post(`users/login`, formData);
     return await data;
   },
-  async getUserDetailsRequest(signal) {
-    const { data } = await $privateHost.get(`/users/current`, { signal });
+  async getUserDetailsRequest() {
+    const { data } = await $privateHost.get(`/users/current`);
     return await data;
   },
   async userLogOutRequest() {
@@ -44,7 +44,7 @@ export const UserAPI = {
 
 export const ContactsAPI = {
   async getContactsRequest(signal) {
-    const { data } = await $privateHost.get(`/contacts`, { signal });
+    const { data } = await $privateHost.get(`/contacts`);
     return await data;
   },
   async addContactRequest(contactData) {
