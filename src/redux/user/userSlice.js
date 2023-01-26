@@ -8,7 +8,6 @@ export const registerUserRequest = createAsyncThunk(
     try {
       const response = await UserAPI.register(formData);
       localStorage.setItem('token', response.token);
-
       return response;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);

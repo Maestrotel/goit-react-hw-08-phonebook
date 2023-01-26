@@ -1,0 +1,29 @@
+.formStyle {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+}
+
+.RegBtn {
+  width: 70px;
+  height: 25px;
+  margin: 0 auto;
+  color: rgb(5, 112, 14);
+  font-weight: 700;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.formRegLabel {
+  font-weight: 500;
+}
+
+.formRegInput {
+  border-radius: 5px;
+  border: none;
+  margin-left: 10px;
+  height: 20px;
+  outline: none;
+}

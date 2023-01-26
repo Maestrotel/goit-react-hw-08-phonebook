@@ -1,5 +1,6 @@
 // import ErrorIndicator from 'components/ErrorIndicator';
 // import Loader from 'components/Loader/Loader';
+import css from './RegisterPage.module.css';
 import React, {
   // useEffect,
   useState,
@@ -8,9 +9,8 @@ import {
   useDispatch,
   // useSelector
 } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
-
 import { registerUserRequest } from 'redux/user/userSlice';
+// import { useNavigate } from 'react-router-dom';
 
 function RegisterPage() {
   const dispatch = useDispatch();
@@ -45,35 +45,43 @@ function RegisterPage() {
       <h1>Registration</h1>
       {/* {isLoading && <Loader />}
       {error && <ErrorIndicator error={error} />} */}
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form onSubmit={handleSubmit} className={css.formStyle}>
+        <label className={css.formRegLabel}>
           Name:
           <input
+            className={css.formRegInput}
             onChange={e => setName(e.target.value)}
+            autoComplete="name"
             value={name}
             type="text"
             required
           />
         </label>
-        <label>
+        <label className={css.formRegLabel}>
           Email:
           <input
+            className={css.formRegInput}
             onChange={e => setEmail(e.target.value)}
+            autoComplete="email"
             value={email}
             type="email"
             required
           />
         </label>
-        <label>
+        <label className={css.formRegLabel}>
           Password:
           <input
+            className={css.formRegInput}
             onChange={e => setPassword(e.target.value)}
+            autoComplete="current-password"
             value={password}
             type="password"
             required
           />
         </label>
-        <button type="submit">Register</button>
+        <button type="submit" className={css.RegBtn}>
+          Register
+        </button>
       </form>
     </div>
   );
