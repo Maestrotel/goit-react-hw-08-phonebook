@@ -15,19 +15,19 @@ export const registerUserRequest = createAsyncThunk(
   }
 );
 
-// export const loginUserRequest = createAsyncThunk(
-//   'user/login',
-//   async (formData, thunkApi) => {
-//     try {
-//       const response = await UserAPI.login(formData);
-//       localStorage.setItem('token', response.token);
+export const loginUserRequest = createAsyncThunk(
+  'user/login',
+  async (formData, thunkApi) => {
+    try {
+      const response = await UserAPI.login(formData);
+      localStorage.setItem('token', response.token);
 
-//       return response;
-//     } catch (error) {
-//       return thunkApi.rejectWithValue(error.message);
-//     }
-//   }
-// );
+      return response;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
 
 // export const authUserRequest = createAsyncThunk(
 //   'user/auth',
@@ -83,23 +83,23 @@ const userSlice = createSlice({
       .addCase(registerUserRequest.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+
+      // Login
+
+      .addCase(loginUserRequest.pending, (state, action) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(loginUserRequest.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.token = action.payload.token;
+        state.userData = action.payload.user;
+      })
+      .addCase(loginUserRequest.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       }),
-
-  // // Login
-
-  // .addCase(loginUserRequest.pending, (state, action) => {
-  //   state.isLoading = true;
-  //   state.error = null;
-  // })
-  // .addCase(loginUserRequest.fulfilled, (state, action) => {
-  //   state.isLoading = false;
-  //   state.token = action.payload.token;
-  //   state.userData = action.payload.user;
-  // })
-  // .addCase(loginUserRequest.rejected, (state, action) => {
-  //   state.isLoading = false;
-  //   state.error = action.payload;
-  // })
   // Auth User
 
   //       .addCase(authUserRequest.pending, (state, action) => {

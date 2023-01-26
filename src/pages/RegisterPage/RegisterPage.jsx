@@ -1,32 +1,25 @@
-// import ErrorIndicator from 'components/ErrorIndicator';
-// import Loader from 'components/Loader/Loader';
 import css from './RegisterPage.module.css';
-import React, {
-  // useEffect,
-  useState,
-} from 'react';
-import {
-  useDispatch,
-  // useSelector
-} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerUserRequest } from 'redux/user/userSlice';
-// import { useNavigate } from 'react-router-dom';
+import Loader from 'components/Loader/Loader';
+import { useNavigate } from 'react-router-dom';
 
 function RegisterPage() {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const isLoading = useSelector(state => state.auth.isLoading);
-  // const userData = useSelector(state => state.auth.userData);
-  // const error = useSelector(state => state.auth.error);
+  const isLoading = useSelector(state => state.auth.isLoading);
+  const userData = useSelector(state => state.auth.userData);
+  const error = useSelector(state => state.auth.error);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // useEffect(() => {
-  //   if (userData !== null) navigate('/contacts');
-  // }, [userData, navigate]);
+  useEffect(() => {
+    if (userData !== null) navigate('/contacts');
+  }, [userData, navigate]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -43,8 +36,8 @@ function RegisterPage() {
   return (
     <div>
       <h1>Registration</h1>
-      {/* {isLoading && <Loader />}
-      {error && <ErrorIndicator error={error} />} */}
+      {isLoading && <Loader />}
+      {error && <p>Something went wrong {error}</p>}
       <form onSubmit={handleSubmit} className={css.formStyle}>
         <label className={css.formRegLabel}>
           Name:
