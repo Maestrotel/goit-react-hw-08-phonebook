@@ -6,3 +6,15 @@
   display: inline-block;
   margin-right: 30px;
 }
+
+.outButton {
+  background-color: rgb(208, 255, 0);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.outButton:hover,
+.outButton:focus {
+  background-color: rgb(0, 255, 0);
+}

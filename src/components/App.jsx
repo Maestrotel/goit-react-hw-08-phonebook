@@ -1,20 +1,45 @@
 import css from './App.module.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import RegisterPage from 'pages/RegisterPage/RegisterPage';
 import ContactsPage from 'pages/ContactsPage/ContactsPage';
 import UserMenu from './UserMenu/UserMenu';
+import { useEffect } from 'react';
+import { authUserRequest } from 'redux/user/userSlice';
 
 export const App = () => {
   const userData = useSelector(state => state.auth.userData);
-  // const isLoading = useSelector(state => state.contacts.isLoading);
-  // console.log(isLoading);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (!token) return;
+
+    dispatch(authUserRequest());
+  }, [dispatch]);
+
+  const isUserAuthenticated = userData !== null;
+
   return (
     <div className={css.mainSection}>
       <header className={css.Header}>
         <nav className={css.NavPart}>
-          {userData !== null ? null : (
+          {isUserAuthenticated ? (
+            <>
+              <NavLink
+                to="/contacts"
+                className={({ isActive }) =>
+                  isActive ? css.active : css.NavLink
+                }
+              >
+                Contacts
+              </NavLink>
+              <UserMenu />
+            </>
+          ) : (
             <>
               <NavLink
                 to="/login"
@@ -35,17 +60,6 @@ export const App = () => {
               </NavLink>
             </>
           )}
-          {userData !== null ? (
-            <NavLink
-              to="/contacts"
-              className={({ isActive }) =>
-                isActive ? css.active : css.NavLink
-              }
-            >
-              Contacts
-            </NavLink>
-          ) : null}
-          <UserMenu />
         </nav>
       </header>
       <Routes>

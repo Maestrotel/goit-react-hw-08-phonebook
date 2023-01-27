@@ -1,12 +1,10 @@
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
+import WithAuthRedirect from 'hoc/WithAuthRedirect';
 import React from 'react';
-// import { useSelector } from 'react-redux';
 
 function ContactsPage() {
-  // const isLoading = useSelector(state => state.contacts.isLoading);
-  // console.log(isLoading);
   return (
     <div>
       <h1>Phonebook</h1>
@@ -18,4 +16,6 @@ function ContactsPage() {
   );
 }
 
-export default ContactsPage;
+const ProtectedContactsPage = WithAuthRedirect(ContactsPage, '/login');
+
+export default ProtectedContactsPage;
