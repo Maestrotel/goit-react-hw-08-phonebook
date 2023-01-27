@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  addContactsThunk,
-  deleteContactsThunk,
-  getContactsThunk,
+  addContactRequest,
+  deleteContactRequest,
+  getContactsRequest,
 } from 'redux/thunks/contactsThunk';
 
 const contactSlice = createSlice({
@@ -21,43 +21,43 @@ const contactSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(getContactsThunk.pending, state => {
+      .addCase(getContactsRequest.pending, state => {
         state.isLoading = true;
       })
-      .addCase(getContactsThunk.fulfilled, (state, action) => {
+      .addCase(getContactsRequest.fulfilled, (state, action) => {
         state.items = action.payload;
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(getContactsThunk.rejected, (state, action) => {
+      .addCase(getContactsRequest.rejected, (state, action) => {
         state.contacts = [];
         state.error = action.payload;
         state.isLoading = false;
       })
-      .addCase(deleteContactsThunk.pending, state => {
+      .addCase(deleteContactRequest.pending, state => {
         state.isLoading = true;
       })
-      .addCase(deleteContactsThunk.fulfilled, (state, action) => {
+      .addCase(deleteContactRequest.fulfilled, (state, action) => {
         state.items = state.items.filter(
-          contact => contact.id !== action.payload
+          contact => contact.id !== action.payload.id
         );
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(deleteContactsThunk.rejected, (state, action) => {
+      .addCase(deleteContactRequest.rejected, (state, action) => {
         state.contacts = [];
         state.error = action.payload;
         state.isLoading = false;
       })
-      .addCase(addContactsThunk.pending, state => {
+      .addCase(addContactRequest.pending, state => {
         state.isLoading = true;
       })
-      .addCase(addContactsThunk.fulfilled, (state, action) => {
+      .addCase(addContactRequest.fulfilled, (state, action) => {
         state.items = [action.payload, ...state.items];
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(addContactsThunk.rejected, (state, action) => {
+      .addCase(addContactRequest.rejected, (state, action) => {
         state.contacts = [];
         state.error = action.error.message;
         state.isLoading = false;
